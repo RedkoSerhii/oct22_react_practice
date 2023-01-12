@@ -34,6 +34,20 @@ const productWithCategoryWithUser = productWithCategory.map(product => {
 export const App: React.FC = () => {
   const [products] = useState(productWithCategoryWithUser);
 
+  const [query, setQuery] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.currentTarget.value);
+  };
+
+  // const visibleProducts = productWithCategoryWithUser.filter(product => {
+  //   const normalizedQuery = query.trim().toLowerCase();
+
+  //   return (
+  //     product.name.includes(normalizedQuery)
+  //   );
+  // });
+
   return (
     <div className="section">
       <div className="container">
@@ -79,9 +93,11 @@ export const App: React.FC = () => {
                 <input
                   data-cy="SearchField"
                   type="text"
+                  id="search-query"
                   className="input"
                   placeholder="Search"
-                  value="qwe"
+                  value={query}
+                  onChange={handleChange}
                 />
 
                 <span className="icon is-left">
